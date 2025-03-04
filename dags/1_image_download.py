@@ -5,7 +5,7 @@ import requests
 
 # Fonksiyon: Resmi indir ve kaydet
 def download_image():
-    url = "http://host.docker.internal:8081/arrow.png"
+    url = "http://host.docker.internal:8090/arrow.png"
     save_path = "/opt/airflow/data/arrow.png"
     
     response = requests.get(url)

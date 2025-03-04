@@ -1,11 +1,10 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-# from airflow.providers.postgres.operators.postgres import PostgresOperator
 from datetime import datetime
 import os
 
 DATA_DIR = "/opt/airflow/data"
-GPKG_URL = "http://host.docker.internal:8081/kontur_population_TR_20231101.gpkg.gz"
+GPKG_URL = "http://host.docker.internal:8090/kontur_population_TR_20231101.gpkg.gz"
 GPKG_FILE = "kontur_population_TR_20231101.gpkg"
 GZ_FILE = f"{GPKG_FILE}.gz"
 DB_CONNECTION = "host=postgres user=airflow password=airflow dbname=airflow"
@@ -25,7 +24,7 @@ dag = DAG(
 
 download_gpkg = BashOperator(
     task_id="download_gpkg",
-    bash_command=f"wget -O {DATA_DIR}/{GZ_FILE} {GPKG_URL}",
+    bash_command=f"curl -o {DATA_DIR}/{GZ_FILE} {GPKG_URL}",
     dag=dag,
 )
 
