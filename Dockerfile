@@ -3,10 +3,10 @@ FROM apache/airflow:2.10.5
 USER root
 
 # Install wget and other dependencies
-RUN apt-get update && apt-get install -y wget bzip2
+RUN apt-get update && apt-get install -y curl
 
 # Download Miniconda installation script
-RUN wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh -O /tmp/miniconda.sh
+RUN curl -L -o /tmp/miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
 
 # Install Miniconda with bash explicitly
 RUN bash /tmp/miniconda.sh -b -p /opt/miniconda
