@@ -1,0 +1,22 @@
+docker run --name postgresdb -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASS=postgres -v /home/kasif/workspace/docker_volumes/postgresdb:/var/lib/postgresql/data -d kartoza/postgis
+docker run --name pgadmin -e PGADMIN_DEFAULT_EMAIL=postgres@postgres.com -e PGADMIN_DEFAULT_PASSWORD=postgres -p 5555:80 -v /home/kasif/workspace/docker_volumes/pgadmin:/var/lib/pgadmin -d dpage/pgadmin4
+docker run --name geoserver -e GEOSERVER_ADMIN_USER=admin -e GEOSERVER_ADMIN_PASSWORD=geoserver -p 8080:8080 -v /home/kasif/workspace/openstreetmap/geoserver_data/osm-styles:/opt/geoserver/data_dir -d kartoza/geoserver
+docker cp /home/kasif/workspace/openstreetmap/files/geoserver-2.21-SNAPSHOT-css-plugin/. geoserver:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib
+docker cp /home/kasif/workspace/openstreetmap/files/geoserver-2.21-SNAPSHOT-feature-pregeneralized-plugin/. geoserver:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib
+
+
+-------- kasif-test --------
+docker run --name postgresdb -p 5434:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASS=postgres -v openstreetmap:/var/lib/postgresql/data -d kartoza/postgis
+docker run --name geoserver -e GEOSERVER_ADMIN_USER=admin -e GEOSERVER_ADMIN_PASSWORD=geoserver -p 8080:8080 -v /opt/workspace/openstreetmap/geoserver_data/osm-styles:/opt/geoserver/data_dir -d kartoza/geoserver
+docker cp /opt/workspace/openstreetmap/files/geoserver-2.21-SNAPSHOT-css-plugin/. geoserver:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib
+docker cp /opt/workspace/openstreetmap/files/geoserver-2.21-SNAPSHOT-feature-pregeneralized-plugin/. geoserver:/usr/local/tomcat/webapps/geoserver/WEB-INF/lib
+
+
+
+
+docker run --name pgadmin 
+-e PGADMIN_DEFAULT_EMAIL=postgres@postgres.com 
+-e PGADMIN_DEFAULT_PASSWORD=postgres 
+-p 5555:80 
+-v /Users/kanatlikarinca/workspace/docker-volumes/pgadmin:/var/lib/pgadmin 
+-d dpage/pgadmin4
